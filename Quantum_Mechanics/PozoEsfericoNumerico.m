@@ -1,17 +1,17 @@
-% --------------------- Código para solución ------------------------
-%------------------ Parte numérica del problema 3--------------------
-%--------------------------Pozo Esférico ----------------------------
+% --------------------- CÃ³digo para soluciï¿½n ------------------------
+%------------------ Parte numÃ©rica del problema 3--------------------
+%--------------------------Pozo EsfÃ©rico ----------------------------
 
 close all
 load('coeficientesH.mat') %Es la matriz con los coeficientes 
-%de los armónicos esféricos del problema 2
+%de los armï¿½nicos esfï¿½ricos del problema 2
 
 
 u = 21;
 dimN = 500;
 n1 = 2000;
 
-% Cálculo constante B
+% Cï¿½lculo constante B
 theta1 = linspace(0,pi,dimN);
 phi1 = linspace(0,2*pi,dimN);
 r = linspace(0,2000,n1);
@@ -32,8 +32,8 @@ I = IntA*IntR;
 B = 1/sqrt(I)
 
 
-% ------------ Cálculo de ceros para Bessel -----------%
-%Primera aproximación (rudmentaria)
+% ------------ CÃ¡lculo de ceros para Bessel -----------%
+%Primera aproximaciï¿½n (rudmentaria)
 for j=0:u-1
 radial = sphbes(j, r);
 k1 = 1;
@@ -48,7 +48,7 @@ for i=1:n1-1
 end
 end
 
-% Cálculo exacto de las Betas
+% Cï¿½lculo exacto de las Betas
 for l = 0:u-1
     for n = 1:dimN
         myfun = @(x,nu) sqrt(pi ./(2* x)) .* besselj(nu + 0.5, x);  
@@ -57,7 +57,7 @@ for l = 0:u-1
         beta(l+1,n) = fzero(fun, Ser(l+1,n));
     end
 end
-energias = beta.^2; %Energías permitidas
+energias = beta.^2; %Energï¿½as permitidas
 
 
 
@@ -93,7 +93,7 @@ probaTot = sum(sum(sum(Probas)));
 
 
 % C
-%---- Encontrar la energía más probable --------------
+%---- Encontrar la energï¿½a mï¿½s probable --------------
 
 for n = 1:dimN
    for l = 1:11
@@ -111,24 +111,24 @@ X = sum(sum(abs(Eprob)));
 [Ml,IndL] = max(Eprob);
 [Mn,nmax] = max(Ml);
 lmax = IndL(nmax);
-disp('Indice l de energía')
-disp(lmax-1) %Indice l de energía
-disp('Indice n de energía')
-disp(nmax) %Indice n de energía
-EnergMasProb =(beta(lmax,nmax))^2 %Vslor más probable para medición de energía
+disp('Indice l de energï¿½a')
+disp(lmax-1) %Indice l de energï¿½a
+disp('Indice n de energï¿½a')
+disp(nmax) %Indice n de energï¿½a
+EnergMasProb =(beta(lmax,nmax))^2 %Vslor mï¿½s probable para mediciï¿½n de energï¿½a
 
 
 
 %D
-%------ Valor esperado de energía -------------------
+%------ Valor esperado de energï¿½a -------------------
 EnergEsperada = sum(sum(Eprob))
 
 
 
 
 %E
-%---------- Valor más probanle Lz ---------------------------
-% Matriz para poner a cada término su m como coefciente
+%---------- Valor mï¿½s probanle Lz ---------------------------
+% Matriz para poner a cada tï¿½rmino su m como coefciente
 Mm = zeros(11,21);
 for i = 2:11
     k = 0;
@@ -138,9 +138,9 @@ for i = 2:11
     end
     
 end
-% Medicion de Lz y cálculo de probabilidad:
+% Medicion de Lz y cï¿½lculo de probabilidad:
 medLz = (abs(coefMatrix.*Mm)).^2;
-%Podemos calcular un coeficiente de normalización
+%Podemos calcular un coeficiente de normalizaciï¿½n
 cNormLz = 1/sum(sum(medLz));
 medLz = cNormLz*medLz;
 ProbM = zeros(1,21);
@@ -148,14 +148,14 @@ for i = 1:21
     ProbM(1,i)=sum(medLz(:,i));
 end
 [mLz,LzIndM] = max(ProbM);
-%El valor más probable para Lz:
-LzProbable = Mm(2,LzIndM) %Y es 1 también
+%El valor mï¿½s probable para Lz:
+LzProbable = Mm(2,LzIndM) %Y es 1 tambiï¿½n
 
 
 
 %F
 %---------- Valor esperado para Z^2 ---------------------------
-% Matriz para poner a cada término su l(l+1) como coefciente
+% Matriz para poner a cada tï¿½rmino su l(l+1) como coefciente
 Ml = zeros(11,21);
 for i = 1:11
     k = 0;
@@ -181,7 +181,7 @@ end
 
 
 function js = sphbes(nu, x)
-% Regresa las funciones esféricas de Bessel(x)
+% Regresa las funciones esfï¿½ricas de Bessel(x)
 
 [nnu lnu] = size(nu);
 [nx lx] = size(x);
@@ -189,7 +189,7 @@ xm = repmat(x, 1, lnu);
 js = sqrt(pi ./(2* xm)) .* besselj(nu + 0.5, x);
 end
 
-%Función de cálculo de las constantes A
+%Funciï¿½n de cï¿½lculo de las constantes A
 function A = Aln(l,beta)
     A = sqrt(2)/(besselj(l+1,beta));
 end
