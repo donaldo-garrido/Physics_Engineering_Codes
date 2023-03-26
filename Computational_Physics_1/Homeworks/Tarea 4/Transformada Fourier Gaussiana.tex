@@ -1,0 +1,22 @@
+\documentclass[a4paper, 14pt]{article}
+\usepackage[a4paper]{geometry}
+\usepackage[english, spanish]{babel}
+\usepackage{amssymb, amsmath}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{float}
+
+\begin{document}
+
+$$ f(x) = e^{-x^2}$$
+$$ Y(\omega) = \frac{1}{\sqrt{2 \pi}}\int_{-\infty}^\infty e^{-x^2} e^{i \omega x}dx =\frac{1}{\sqrt{2 \pi}} \int_{-\infty}^\infty e^{-x^2+i \omega x}dx =  \frac{1}{\sqrt{2 \pi}} \int_{-\infty}^\infty e^{-(x+\frac{i\omega}{2})^2+ (\frac{\omega}{2})^2}dx$$
+Definimos $x^2+y^2 = r^2$
+$$I^2= \int_0^\infty \int_0^{2\pi} r e^{-r^2}drd\theta=\left.-\pi e^{-r^2}\right |_0^\infty =\pi \qquad \longrightarrow \qquad \therefore I=\pi$$
+Regresando a la transformada original:
+$$\frac{\sqrt{\pi}}{\sqrt{2 \pi}}e^{-(\omega / 2)^2} \qquad \longrightarrow \qquad Y(\omega)= \frac{1}{\sqrt{2}}e^{-\frac{\omega ^2}{4}}$$
+
+
+
+
+ \end{document}
